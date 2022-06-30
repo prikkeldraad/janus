@@ -11,4 +11,6 @@ GH HELP: https://cli.github.com/manual/gh_pr_checkout
 # Install
 1. Checkout repo
 2. `make install`
-3. `make run`
+
+# Run
+1. `make run`
