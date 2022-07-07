@@ -6,7 +6,7 @@ install:
 	pip3 install -r requirements.txt
 
 run:
-	cd vb && python3 -m vb
+	python3 -m vb
 
 test:
 	python3 -m pytest
