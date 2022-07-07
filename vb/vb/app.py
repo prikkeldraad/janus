@@ -1,5 +1,5 @@
 from aiohttp import web
-
+from .models import VersionModel
 
 
 class VersionView(web.View):
