@@ -4,4 +4,7 @@ install:
 	pip3 install setuptools
 
 run:
-	cd vb && python3 -m vb
+	python3 -m vb
+
+test:
+	python3 -m pytest
