@@ -25,6 +25,7 @@ platformdirs==2.4.0
 pluggy==1.0.0
 py==1.11.0
 pycrypto==2.6.1
+pydantic==1.9.1
 PyGObject==3.26.1
 pyparsing==3.0.9
 pytest==7.0.1
