@@ -1,5 +1,5 @@
 from aiohttp import web
-
+from .models import VersionModel
 
 async def handle(request):
     name = request.match_info.get("name", "Anonymous")
