@@ -4,11 +4,8 @@ from aiohttp import web
 
 class VersionView(web.View):
     async def get(self):
-        result = self.request.get('test1')
-        return web.Response(body=result)
-
-    async def post(self):
-        return await post_resp(self.request)
+        result = self.request.match_info.get("name", "Unknown")
+        return web.Response(body="You are requesting version information for " + result)
 
 
 async def handle(request):
@@ -19,6 +16,6 @@ async def handle(request):
 
 def create_app():
     app = web.Application()
-    app.add_routes([web.view("/test", VersionView)])
+    app.add_routes([web.view("/version/{name}", VersionView)])
     app.add_routes([web.get("/", handle), web.get("/{name}", handle)])
     return app
