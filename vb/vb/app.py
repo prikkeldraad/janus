@@ -7,6 +7,10 @@ class VersionView(web.View):
         result = self.request.match_info.get("name", "Unknown")
         return web.Response(body="You are requesting version information for " + result)
 
+    async def post(self):
+        json_data = await self.request.json()
+        return web.json_response({"name":"aaaaa"}, content_type='application/json')
+
 
 
 
