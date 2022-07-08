@@ -9,7 +9,9 @@ class VersionView(web.View):
 
     async def post(self):
         json_data = await self.request.json()
-        return web.json_response(json_data, content_type='application/json')
+        version = VersionModel(**json_data)
+
+        return web.json_response(version.dict(), content_type='application/json')
 
 
 
