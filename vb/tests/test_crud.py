@@ -9,9 +9,10 @@ async def test_verion_get(aiohttp_client):
 
 async def test_version_post(aiohttp_client):
     client = await aiohttp_client(create_app())
-    resp = await client.post("/version/jira", json={
-        "major": "10000"
-    })
+    payload = {   "software_name": "Jira",
+        "major": "6",
+        "minor": "2",
+        "release_name": "RC2"}
+    resp = await client.post("/version/jira", json=payload)
     json_data = await resp.json()
-    expected_response_text = b"You are requesting version information for jira"
-    assert expected_response_text == json_data
+    assert payload == json_data
