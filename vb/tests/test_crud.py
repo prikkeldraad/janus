@@ -13,7 +13,9 @@ async def test_version_post(aiohttp_client):
         "software_name": "Jira",
         "major": "6",
         "minor": "2",
-        "release_name": "RC2"
+        "patch": "2",
+        "release_name": "RC2",
+        "version": "6.2"
     }
     expected_response = {"id": None, "software_name": "Jira", "release_name": "RC2", "version": None, "major": "6", "minor": "2", "patch": None}
     resp = await client.post("/version/jira", json=payload)

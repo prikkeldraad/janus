@@ -1,6 +1,7 @@
 from aiohttp import web
 from .models import VersionModel
 from .db import Version 
+from pydantic import ValidationError 
 
 class VersionView(web.View):
     async def get(self):
@@ -9,8 +10,13 @@ class VersionView(web.View):
 
     async def post(self):
         json_data = await self.request.json()
-        version = VersionModel(**json_data)
-        #Version.create(**version.dict()).save()
+        try:
+            version = VersionModel(**json_data)
+        except ValidationError as ex:
+            return web.json_response(ex.dict())
+            pass
+
+        Version.create(**version.dict()).save()
         return web.json_response(version.dict(), content_type='application/json')
 
 
