@@ -6,3 +6,18 @@ async def test_verion_get(aiohttp_client):
     response_text = await resp.content.read()
     expected_response_text = b"You are requesting version information for jira"
     assert response_text == response_text
+
+async def test_version_post(aiohttp_client):
+    client = await aiohttp_client(create_app())
+    payload = {
+        "software_name": "Jira",
+        "major": "6",
+        "minor": "2",
+        "patch": "2",
+        "release_name": "RC2",
+        "version": "6.2"
+    }
+    expected_response = {"id": None, "software_name": "Jira", "release_name": "RC2", "version": None, "major": "6", "minor": "2", "patch": None}
+    resp = await client.post("/version/jira", json=payload)
+    json_data = await resp.json()
+    assert expected_response == json_data
