@@ -4,11 +4,11 @@ versions_db = SqliteDatabase('versions.db')
 
 class Version(Model):
     software_name = CharField()
-    release_name = CharField()
+    release_name = CharField(NULL=True)
     version = CharField()
-    major = CharField()
-    minor = CharField()
-    patch = CharField()
+    major = CharField(NULL=True)
+    minor = CharField(NULL=True)
+    patch = CharField(NULL=True)
 
     class Meta:
         database = versions_db
