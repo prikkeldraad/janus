@@ -1,7 +1,7 @@
-FROM python:3.8-alpine
+FROM python:3.6
 
-APK ADD make
+RUN apt update && apt install make -y
 ADD . /code
 WORKDIR /code
-RUN pip install -r requirements.txt
+RUN make install 
 RUN make run 
