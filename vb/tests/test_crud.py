@@ -17,7 +17,7 @@ async def test_version_post(aiohttp_client):
         "release_name": "RC2",
         "version": "6.2"
     }
-    expected_response = {"id": None, "software_name": "Jira", "release_name": "RC2", "version": None, "major": "6", "minor": "2", "patch": None}
+    expected_response = {"id": None, "software_name": "Jira", "release_name": "RC2", "version": "6.2", "major": "6", "minor": "2", "patch": "2"}
     resp = await client.post("/version/jira", json=payload)
     json_data = await resp.json()
     assert expected_response == json_data
