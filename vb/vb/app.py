@@ -13,7 +13,7 @@ class VersionView(web.View):
         try:
             version = VersionModel(**json_data)
         except ValidationError as ex:
-            return web.json_response(str(ex))
+            return web.Response(body=ex.json(), content_type='application/json')
             
 
         Version.create(**version.dict()).save()
