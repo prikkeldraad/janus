@@ -9,4 +9,4 @@ run:
 	python3 -m vb
 
 test:
-	python3 -m pytest
+	python3 -m pytest -vv 

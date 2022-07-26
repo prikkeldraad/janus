@@ -3,9 +3,9 @@ from typing import List, Optional
 
 class VersionModel(BaseModel):
     id: Optional[int]
-    software_name: Optional[str]
+    software_name: str
     release_name: Optional[str]
-    version: Optional[str]
+    version: str
     major: Optional[str]
     minor: Optional[str]
     patch: Optional[str]

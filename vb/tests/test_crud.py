@@ -36,3 +36,18 @@ async def test_version_post_valid2(aiohttp_client):
     resp = await client.post("/version/jira", json=payload)
     json_data = await resp.json()
     assert expected_response == json_data
+
+async def test_version_post_valid3(aiohttp_client):
+    client = await aiohttp_client(create_app())
+    payload = {
+        "software_name": "Jira",
+        "major": None,
+        "minor": None,
+        "patch": None,
+        "release_name": "RC2",
+        "version": None
+    }
+    expected_response = {"id": None, "software_name": "Jira", "release_name": "RC2", "version": None, "major": None, "minor": None, "patch": None}
+    resp = await client.post("/version/jira", json=payload)
+    json_data = await resp.json()
+    assert expected_response == json_data
