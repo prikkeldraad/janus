@@ -47,7 +47,7 @@ async def test_version_post_valid3(aiohttp_client):
         "release_name": "RC2",
         "version": None
     }
-    expected_response = {"id": None, "software_name": "Jira", "release_name": "RC2", "version": None, "major": None, "minor": None, "patch": None}
+    expected_response =  [{'loc': ['version'],  'msg': 'none is not an allowed value',  'type': 'type_error.none.not_allowed'}]
     resp = await client.post("/version/jira", json=payload)
     json_data = await resp.json()
     assert expected_response == json_data
