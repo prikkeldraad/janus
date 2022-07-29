@@ -37,7 +37,7 @@ async def test_version_post_valid2(aiohttp_client):
     json_data = await resp.json()
     assert expected_response == json_data
 
-async def test_version_post_valid3(aiohttp_client):
+async def test_version_post_missing_version(aiohttp_client):
     client = await aiohttp_client(create_app())
     payload = {
         "software_name": "Jira",
@@ -48,6 +48,21 @@ async def test_version_post_valid3(aiohttp_client):
         "version": None
     }
     expected_response =  [{'loc': ['version'],  'msg': 'none is not an allowed value',  'type': 'type_error.none.not_allowed'}]
+    resp = await client.post("/version/jira", json=payload)
+    json_data = await resp.json()
+    assert expected_response == json_data
+
+async def test_version_post_missing_software_name(aiohttp_client):
+    client = await aiohttp_client(create_app())
+    payload = {
+        "software_name": None,
+        "major": None,
+        "minor": None,
+        "patch": None,
+        "release_name": "RC2",
+        "version": "1.2.3"
+    }
+    expected_response =  [{'loc': ['software_name'],  'msg': 'none is not an allowed value',  'type': 'type_error.none.not_allowed'}]
     resp = await client.post("/version/jira", json=payload)
     json_data = await resp.json()
     assert expected_response == json_data
