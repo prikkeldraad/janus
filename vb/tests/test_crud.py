@@ -17,7 +17,7 @@ async def test_version_post_valid(aiohttp_client):
         "release_name": "RC2",
         "version": "6.2"
     }
-    expected_response = {"id": None, "software_name": "Jira", "release_name": "RC2", "version": "6.2", "major": "6", "minor": "2", "patch": "2"}
+    expected_response = {"id": None, "version": "6.2", "major": "6", "minor": "2", "patch": "2"}
     resp = await client.post("/version/jira", json=payload)
     json_data = await resp.json()
     assert expected_response == json_data
@@ -32,7 +32,7 @@ async def test_version_post_valid2(aiohttp_client):
         "release_name": "RC2",
         "version": "6.2"
     }
-    expected_response = {"id": None, "software_name": "Jira", "release_name": "RC2", "version": "6.2", "major": None, "minor": None, "patch": None}
+    expected_response = {"id": None, "version": "6.2", "major": None, "minor": None, "patch": None}
     resp = await client.post("/version/jira", json=payload)
     json_data = await resp.json()
     assert expected_response == json_data
@@ -52,17 +52,3 @@ async def test_version_post_missing_version(aiohttp_client):
     json_data = await resp.json()
     assert expected_response == json_data
 
-async def test_version_post_missing_software_name(aiohttp_client):
-    client = await aiohttp_client(create_app())
-    payload = {
-        "software_name": None,
-        "major": None,
-        "minor": None,
-        "patch": None,
-        "release_name": "RC2",
-        "version": "1.2.3"
-    }
-    expected_response =  [{'loc': ['software_name'],  'msg': 'none is not an allowed value',  'type': 'type_error.none.not_allowed'}]
-    resp = await client.post("/version/jira", json=payload)
-    json_data = await resp.json()
-    assert expected_response == json_data

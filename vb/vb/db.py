@@ -2,8 +2,16 @@ from peewee import *
 
 versions_db = SqliteDatabase('versions.db')
 
+
+class Software(Model):
+    vendor = CharField()
+    name = CharField()
+    class Meta:
+        database = versions_db
+
+
 class Version(Model):
-    software_name = CharField()
+    ForeignKeyField(Software, backref='versions')
     release_name = CharField(null=True)
     version = CharField()
     major = CharField(null=True)
@@ -14,7 +22,7 @@ class Version(Model):
         database = versions_db
 
 
-versions_db.create_tables([Version])
+versions_db.create_tables([Software, Version])
 
 # version = Version.create(software_name="aaaaA",release_name="woooo", version="aaaa", major="gggg", minor="qqqq",patch="aaaA")
 # version.save()
